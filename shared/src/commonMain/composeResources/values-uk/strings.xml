@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wearcast</string>
+    <string name="common_yes">Так</string>
+    <string name="common_no">Ні</string>
+
+    <!-- Нижнє меню -->
+    <string name="tab_today">Сьогодні</string>
+    <string name="tab_wardrobe">Гардероб</string>
+    <string name="tab_outfits">Образи</string>
+    <string name="tab_profile">Профіль</string>
+
+    <!-- Онбординг -->
+    <string name="onboarding_skip">Пропустити</string>
+    <string name="onboarding_next">Далі</string>
+    <string name="onboarding_get_started">Почати</string>
+    <string name="onboarding_privacy">Дані вашого гардероба залишаються на пристрої</string>
+    <string name="onboarding_1_badge">Розумний архів</string>
+    <string name="onboarding_1_title">Ваш гардероб у порядку</string>
+    <string name="onboarding_1_desc">Сфотографуйте річ один раз. Ми визначимо тканину, крій і колір, щоб усе було готове до комбінування.</string>
+    <string name="onboarding_2_badge">З урахуванням погоди</string>
+    <string name="onboarding_2_title">Одяг за погодою</string>
+    <string name="onboarding_2_desc">Вкажіть місто один раз. Ми перевіримо прогноз і підберемо лише ті речі, що пасують на сьогодні.</string>
+    <string name="onboarding_3_badge">Образи на щодень</string>
+    <string name="onboarding_3_title">Образи саме для вас</string>
+    <string name="onboarding_3_desc">Гортайте образи, торкніться будь-якої речі, щоб замінити або зафіксувати її, і обирайте улюблений.</string>
+
+    <!-- Сьогодні -->
+    <string name="today_subtitle">Одяг за погодою з вашого власного гардероба</string>
+    <string name="today_weather_details">Відчувається як 2°, хмарно, невеликий дощ</string>
+    <string name="filter_all">Усе</string>
+    <string name="filter_tops">Верх</string>
+    <string name="filter_bottoms">Низ</string>
+    <string name="filter_shoes">Взуття</string>
+    <string name="filter_bags">Сумки</string>
+    <string name="saved_settings_title">Збережені налаштування</string>
+    <string name="onboarding_completed_label">Онбординг пройдено: %1$s</string>
+    <string name="reset_onboarding">Скинути прапорець онбордингу</string>
+    <string name="mark_onboarding">Позначити онбординг пройденим</string>
+    <string name="choose_outfit">Обрати цей образ</string>
+    <string name="shuffle">Перемішати</string>
+
+    <!-- Гардероб / Образи -->
+    <string name="wardrobe_title">Мій гардероб</string>
+    <string name="wardrobe_placeholder">Тут з\'являться ваші речі.</string>
+    <string name="outfits_title">Образи</string>
+    <string name="outfits_placeholder">Тут з\'являться ваші збережені та вже одягнені образи.</string>
+
+    <!-- Профіль -->
+    <string name="profile_overline">АКАУНТ І СТИЛЬ</string>
+    <string name="profile_title">Профіль і налаштування</string>
+    <string name="pro_member">Pro-учасник</string>
+    <string name="weather_origin">МІСТО ДЛЯ ПРОГНОЗУ ПОГОДИ</string>
+    <string name="city_ternopil">Тернопіль, Україна</string>
+    <string name="change">Змінити</string>
+    <string name="cold_title">Чутливість до холоду</string>
+    <string name="cold_subtitle">Підлаштовує рекомендації під ваш комфорт</string>
+    <string name="layer_bias">Зсув шарів: -%1$s°</string>
+    <string name="cold_low">Мені спекотно</string>
+    <string name="cold_mid">Помірно</string>
+    <string name="cold_high">Мені завжди холодно</string>
+    <string name="cold_hint">Wearcast радить щільніші светри та термобілизну вже при %1$s°C замість стандартних %2$s°C.</string>
+    <string name="slots_title">Слоти гардероба</string>
+    <string name="slots_subtitle">Активні слоти рекомендацій</string>
+    <string name="slot_top">Верхні шари</string>
+    <string name="slot_top_desc">Куртки, светри, пальта й сорочки</string>
+    <string name="slot_bottom">Низ</string>
+    <string name="slot_bottom_desc">Штани, джинси та спідниці</string>
+    <string name="slot_shoes">Взуття</string>
+    <string name="slot_shoes_desc">Водостійкі черевики та лофери</string>
+    <string name="slot_bags">Сумки</string>
+    <string name="slot_bags_desc">Шопери, сумки через плече та рюкзаки</string>
+    <string name="slot_accessories">Аксесуари</string>
+    <string name="slot_accessories_desc">Шарфи, парасолі та головні убори</string>
+    <string name="preferences_title">Параметри</string>
+    <string name="language_label">МОВА</string>
+    <string name="light_mode">Світла тема</string>
+    <string name="light_mode_desc">Тепла пергаментна палітра</string>
+    <string name="sign_out">Вийти з Wearcast</string>
+    <string name="app_version">Wearcast v%1$s · збірка %2$s</string>
+</resources>

@@ -1,91 +1,82 @@
 package com.example.wear
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.example.wear.core.AppLog
+import com.example.wear.core.LocalAppLocale
+import com.example.wear.core.UserSettings
+import com.example.wear.ui.main.MainScreen
+import com.example.wear.ui.main.MainTab
+import com.example.wear.ui.onboarding.OnboardingScreen
 import com.example.wear.ui.theme.WearTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
+/** Точка входу: онбординг (Pager) -> головний екран з нижнім меню. Мова перемикається "на льоту". */
 @Composable
 fun App() {
-    WearTheme {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            var selected by remember { mutableStateOf("All") }
+    val settings = remember { UserSettings() }
+    var onboardingDone by remember { mutableStateOf(settings.onboardingCompleted) }
+    var lightMode by remember { mutableStateOf(settings.lightMode) }
+    var language by remember { mutableStateOf(settings.language) }   // "system" | "en" | "uk"
+    var tab by remember { mutableStateOf(MainTab.Today) }            // тут, щоб не скидалась при зміні мови
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(24.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    "Wearcast",
-                    style = MaterialTheme.typography.displayMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-                Text(
-                    "Dressed for the weather, from your own closet",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+    LaunchedEffect(Unit) {
+        AppLog.i("App started, onboardingCompleted=$onboardingDone, language=$language")
+    }
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = MaterialTheme.shapes.large,
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-                ) {
-                    Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(
-                            "12° / 4°",
-                            style = MaterialTheme.typography.headlineLarge,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+    val appLocale = when (language) {
+        "uk" -> "uk"
+        "en" -> "en"
+        else -> null
+    }
+
+    CompositionLocalProvider(LocalAppLocale provides appLocale) {
+        // key(language) змушує перебудувати UI з новими рядками після зміни мови
+        key(language) {
+            WearTheme(darkTheme = !lightMode) {
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    if (!onboardingDone) {
+                        OnboardingScreen(
+                            onFinish = {
+                                settings.onboardingCompleted = true
+                                onboardingDone = true
+                                AppLog.i("Onboarding finished, flag saved")
+                            }
                         )
-                        Text("Feels like 2°, cloudy, 20% rain", style = MaterialTheme.typography.bodyMedium)
-                    }
-                }
-
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    listOf("All", "Tops", "Bottoms", "Shoes", "Bags").forEach { label ->
-                        FilterChip(
-                            selected = selected == label,
-                            onClick = { selected = label },
-                            label = { Text(label) }
+                    } else {
+                        MainScreen(
+                            settings = settings,
+                            tab = tab,
+                            onTabChange = { tab = it },
+                            lightMode = lightMode,
+                            onLightModeChange = {
+                                lightMode = it
+                                settings.lightMode = it
+                                AppLog.i("Light mode changed to $it")
+                            },
+                            language = language,
+                            onLanguageChange = {
+                                settings.language = it
+                                language = it
+                                AppLog.i("Language changed to $it")
+                            },
+                            onboardingCompleted = onboardingDone,
+                            onOnboardingCompletedChange = {
+                                onboardingDone = it
+                                settings.onboardingCompleted = it
+                                AppLog.i("onboardingCompleted changed to $it")
+                            }
                         )
                     }
-                }
-
-                Button(onClick = {}, shape = CircleShape, modifier = Modifier.fillMaxWidth()) {
-                    Text("Choose this outfit")
-                }
-                OutlinedButton(onClick = {}, shape = CircleShape, modifier = Modifier.fillMaxWidth()) {
-                    Text("Shuffle")
                 }
             }
         }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wearcast</string>
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+
+    <!-- Bottom bar -->
+    <string name="tab_today">Today</string>
+    <string name="tab_wardrobe">Wardrobe</string>
+    <string name="tab_outfits">Outfits</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get started</string>
+    <string name="onboarding_privacy">Your wardrobe data stays private on device</string>
+    <string name="onboarding_1_badge">Smart archiving</string>
+    <string name="onboarding_1_title">Your closet, organized</string>
+    <string name="onboarding_1_desc">Snap a quick photo once. We tag fabrics, cuts and colors so everything is ready for pairing.</string>
+    <string name="onboarding_2_badge">Weather aware</string>
+    <string name="onboarding_2_title">Dressed for the weather</string>
+    <string name="onboarding_2_desc">Set your city once. We check the forecast and pick only the pieces that fit the day.</string>
+    <string name="onboarding_3_badge">Daily looks</string>
+    <string name="onboarding_3_title">Outfits made for you</string>
+    <string name="onboarding_3_desc">Swipe through looks, tap any item to swap or lock it, then choose your favorite.</string>
+
+    <!-- Today -->
+    <string name="today_subtitle">Dressed for the weather, from your own closet</string>
+    <string name="today_weather_details">Feels like 2°, cloudy, light rain</string>
+    <string name="filter_all">All</string>
+    <string name="filter_tops">Tops</string>
+    <string name="filter_bottoms">Bottoms</string>
+    <string name="filter_shoes">Shoes</string>
+    <string name="filter_bags">Bags</string>
+    <string name="saved_settings_title">Saved settings</string>
+    <string name="onboarding_completed_label">Onboarding completed: %1$s</string>
+    <string name="reset_onboarding">Reset onboarding flag</string>
+    <string name="mark_onboarding">Mark onboarding as completed</string>
+    <string name="choose_outfit">Choose this outfit</string>
+    <string name="shuffle">Shuffle</string>
+
+    <!-- Wardrobe / Outfits -->
+    <string name="wardrobe_title">My Wardrobe</string>
+    <string name="wardrobe_placeholder">Your items will appear here.</string>
+    <string name="outfits_title">Outfits</string>
+    <string name="outfits_placeholder">Your saved and worn looks will appear here.</string>
+
+    <!-- Profile -->
+    <string name="profile_overline">ACCOUNT &amp; STYLING MODEL</string>
+    <string name="profile_title">Profile &amp; Settings</string>
+    <string name="pro_member">Pro Member</string>
+    <string name="weather_origin">WEATHER FORECAST ORIGIN</string>
+    <string name="city_ternopil">Ternopil, Ukraine</string>
+    <string name="change">Change</string>
+    <string name="cold_title">Cold Sensitivity</string>
+    <string name="cold_subtitle">Adjusts outfit recommendations to your body comfort</string>
+    <string name="layer_bias">-%1$s° Layer Bias</string>
+    <string name="cold_low">I run hot</string>
+    <string name="cold_mid">Moderate</string>
+    <string name="cold_high">I\'m always cold</string>
+    <string name="cold_hint">Wearcast suggests heavier knits &amp; thermal baselayers at %1$s°C instead of default %2$s°C.</string>
+    <string name="slots_title">Wardrobe Slots</string>
+    <string name="slots_subtitle">Active Recommendation Slots</string>
+    <string name="slot_top">Top layers</string>
+    <string name="slot_top_desc">Jackets, knits, coats &amp; shirts</string>
+    <string name="slot_bottom">Bottoms</string>
+    <string name="slot_bottom_desc">Trousers, denim &amp; skirts</string>
+    <string name="slot_shoes">Shoes</string>
+    <string name="slot_shoes_desc">Weatherproof boots &amp; loafers</string>
+    <string name="slot_bags">Bags</string>
+    <string name="slot_bags_desc">Totes, crossbodies &amp; backpacks</string>
+    <string name="slot_accessories">Accessories</string>
+    <string name="slot_accessories_desc">Scarves, umbrellas &amp; headwear</string>
+    <string name="preferences_title">Preferences</string>
+    <string name="language_label">LANGUAGE</string>
+    <string name="light_mode">Light mode</string>
+    <string name="light_mode_desc">Warm editorial parchment palette</string>
+    <string name="sign_out">Sign Out of Wearcast</string>
+    <string name="app_version">Wearcast v%1$s · Build %2$s</string>
+</resources>
