@@ -53,7 +53,9 @@ fun MainScreen(
     language: String,
     onLanguageChange: (String) -> Unit,
     onboardingCompleted: Boolean,
-    onOnboardingCompletedChange: (Boolean) -> Unit
+    userName: String?,
+    onResetOnboarding: () -> Unit,
+    onSignOut: () -> Unit
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -73,7 +75,7 @@ fun MainScreen(
         when (tab) {
             MainTab.Today -> TodayScreen(
                 onboardingCompleted = onboardingCompleted,
-                onOnboardingCompletedChange = onOnboardingCompletedChange,
+                onResetOnboarding = onResetOnboarding,
                 modifier = modifier
             )
             MainTab.Wardrobe -> PlaceholderScreen(
@@ -94,10 +96,8 @@ fun MainScreen(
                 onLightModeChange = onLightModeChange,
                 language = language,
                 onLanguageChange = onLanguageChange,
-                onSignOut = {
-                    AppLog.i("Signed out, onboarding will be shown again")
-                    onOnboardingCompletedChange(false)
-                },
+                userName = userName,
+                onSignOut = onSignOut,
                 modifier = modifier
             )
         }

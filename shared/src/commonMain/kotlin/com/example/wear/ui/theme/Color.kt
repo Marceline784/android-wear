@@ -22,3 +22,7 @@ val NightSurface = Color(0xFF182638)
 val NightText = Color(0xFFEAF1F8)
 val NightMuted = Color(0xFFA9B8C9)
 val NightPrimary = Color(0xFF8CC0F5)
+
+// ---- Помилки валідації (контрастний червоний для тексту й рамок полів) ----
+val ErrorRed = Color(0xFFB3261E)
+val ErrorRedDark = Color(0xFFFF8A80)

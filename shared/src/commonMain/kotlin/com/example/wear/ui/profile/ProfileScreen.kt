@@ -72,9 +72,12 @@ fun ProfileScreen(
     onLightModeChange: (Boolean) -> Unit,
     language: String,                       // "system" | "en" | "uk"
     onLanguageChange: (String) -> Unit,
+    userName: String?,
     onSignOut: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val displayName = userName ?: ""
+    val initials = displayName.trim().take(2).uppercase()
     var coldSensitivity by remember { mutableStateOf(settings.coldSensitivity) }
     val slotState = remember {
         mutableStateMapOf<String, Boolean>().apply {
@@ -119,11 +122,11 @@ fun ProfileScreen(
                     modifier = Modifier.size(56.dp).clip(CircleShape).background(MaterialTheme.colorScheme.tertiary),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text("AK", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onTertiary)
+                    Text(initials, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onTertiary)
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Anna Kovalenko", style = MaterialTheme.typography.titleMedium)
+                        Text(displayName, style = MaterialTheme.typography.titleMedium)
                         Pill(
                             stringResource(Res.string.pro_member),
                             MaterialTheme.colorScheme.secondaryContainer,
@@ -131,7 +134,7 @@ fun ProfileScreen(
                         )
                     }
                     Text(
-                        "anna.k@wearcast.app",
+                        "@" + displayName.lowercase(),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

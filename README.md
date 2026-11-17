@@ -1,33 +1,43 @@
+# Wearcast
 
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+Kotlin Multiplatform (Android + Desktop), Compose Multiplatform. Підбір одягу з гардероба за погодою.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+## Запуск
 
-### Running the apps
+- Android: `./gradlew :androidApp:assembleDebug` або Run у Android Studio
+- Desktop: `./gradlew :desktopApp:run`
+- Тести: `./gradlew :shared:jvmTest` і `./gradlew :shared:testAndroidHostTest`
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+## Лабораторна №5: навігація, DI, MVI, авторизація
 
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
+| Пункт завдання | Де реалізовано |
+|---|---|
+| Navigation 3 | `ui/navigation/` (Route, AppNavigation), залежність `navigation3-ui` (KMP-артефакт охоплює й Android) |
+| Koin | `di/AppModule.kt`, запуск у `App.kt` (`KoinApplication`) |
+| multiplatform-settings | `data/` (репозиторії), `core/UserSettings.kt` |
+| MVI онбордингу + use case збереження | `ui/onboarding/` (State, Intent, Effect, ViewModel), `domain/usecase/OnboardingUseCases.kt` |
+| Екран авторизації, перехід з онбордингу | `ui/auth/`, ефект `OnboardingEffect.Completed` -> `Route.Login` |
+| ViewModel і use case для головного екрана | `ui/main/MainViewModel.kt`, `IsOnboardingCompletedUseCase` |
+| Вибір екрана за результатом онбордингу | `MainViewModel`: онбординг не пройдено -> Onboarding, не увійшов -> Login, інакше Main |
+| Дизайн і MVI екрана авторизації | `ui/auth/login/`, `ui/auth/register/`, `ui/auth/components/` |
+| Валідація імені та пароля | `domain/usecase/ValidationUseCases.kt` |
+| Дії клавіатури | Ім'я: Next -> фокус на пароль; Пароль: Done -> вхід (як кнопка "Увійти") |
+| Реєстрація і вхід | `data/AuthRepositoryImpl.kt`: сіль + SHA-256, пароль у відкритому вигляді не зберігається |
 
-### Running tests
+### Потік екранів
 
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
+```
+Main (перевірка) -> онбординг не пройдено -> Onboarding -> Login
+                 -> не увійшов            -> Login
+                 -> увійшов               -> Main (вкладки)
 
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- Desktop tests: `./gradlew :shared:jvmTest`
+Login -> "Створити" -> Register -> знову Login (ім'я підставлене) -> Main
+```
 
----
+Як у звичайних застосунках: спершу вхід; немає облікового запису, створюєте його й знову входите.
+Поки користувач не натиснув "Вийти", пароль повторно не запитується: сесія зберігається між запусками.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
-=======
-# android-wear
+### Логотип
+
+Угорі екранів входу й реєстрації по центру стоять логотип і назва (`brand_name` у `strings.xml`).
+Власний логотип: `shared/src/commonMain/kotlin/com/example/wear/ui/auth/components/BrandLogo.kt`.

@@ -38,7 +38,7 @@ import wear.shared.generated.resources.*
 @Composable
 fun TodayScreen(
     onboardingCompleted: Boolean,
-    onOnboardingCompletedChange: (Boolean) -> Unit,
+    onResetOnboarding: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var selected by remember { mutableStateOf(0) }
@@ -127,13 +127,11 @@ fun TodayScreen(
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Button(
-                    onClick = { onOnboardingCompletedChange(!onboardingCompleted) },
+                    onClick = onResetOnboarding,
                     shape = CircleShape,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        stringResource(if (onboardingCompleted) Res.string.reset_onboarding else Res.string.mark_onboarding)
-                    )
+                    Text(stringResource(Res.string.reset_onboarding))
                 }
             }
         }

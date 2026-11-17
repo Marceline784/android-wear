@@ -3,15 +3,11 @@ package com.example.wear.core
 import com.russhwolf.settings.Settings
 
 /**
- * Налаштування користувача (бібліотека multiplatform-settings).
+ * Налаштування інтерфейсу користувача (бібліотека multiplatform-settings).
+ * Прапорець онбордингу та сесія користувача тепер живуть у репозиторіях (data/).
  * Android: SharedPreferences, Desktop: java.util.prefs. Значення зберігаються між запусками.
  */
 class UserSettings(private val settings: Settings = Settings()) {
-
-    /** Чи користувач уже пройшов екран ознайомлення (онбординг). */
-    var onboardingCompleted: Boolean
-        get() = settings.getBoolean(KEY_ONBOARDING_COMPLETED, false)
-        set(value) = settings.putBoolean(KEY_ONBOARDING_COMPLETED, value)
 
     /** Мова інтерфейсу: "system" (за пристроєм), "en" або "uk". */
     var language: String
@@ -34,7 +30,6 @@ class UserSettings(private val settings: Settings = Settings()) {
     fun setSlotEnabled(slot: String, enabled: Boolean) = settings.putBoolean("slot_$slot", enabled)
 
     private companion object {
-        const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"
         const val KEY_LANGUAGE = "language"
         const val KEY_COLD_SENSITIVITY = "cold_sensitivity"
         const val KEY_LIGHT_MODE = "light_mode"

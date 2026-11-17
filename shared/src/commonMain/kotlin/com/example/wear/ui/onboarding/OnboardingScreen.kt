@@ -28,18 +28,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.wear.core.AppLog
+import com.example.wear.core.mvi.ObserveEffects
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import wear.shared.generated.resources.*
 
 private data class OnboardingPage(
@@ -65,9 +67,25 @@ private val pages = listOf(
     )
 )
 
+/** Точка входу екрана: підключає MVI-ViewModel і реагує на ефект завершення. */
+@Composable
+fun OnboardingRoute(
+    onCompleted: (signedIn: Boolean) -> Unit,
+    viewModel: OnboardingViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    ObserveEffects(viewModel.effects) { effect ->
+        when (effect) {
+            is OnboardingEffect.Completed -> onCompleted(effect.signedIn)
+        }
+    }
+    OnboardingScreen(state = state, onIntent = viewModel::onIntent)
+}
+
 @Composable
 fun OnboardingScreen(
-    onFinish: () -> Unit,
+    state: OnboardingState,
+    onIntent: (OnboardingIntent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { pages.size })
@@ -91,10 +109,10 @@ fun OnboardingScreen(
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
-            TextButton(onClick = {
-                AppLog.i("Onboarding skipped on page ${pagerState.currentPage + 1}")
-                onFinish()
-            }) { Text(stringResource(Res.string.onboarding_skip)) }
+            TextButton(
+                onClick = { onIntent(OnboardingIntent.Skip) },
+                enabled = !state.isSaving
+            ) { Text(stringResource(Res.string.onboarding_skip)) }
         }
 
         // Лічильник 01 / 03
@@ -136,12 +154,12 @@ fun OnboardingScreen(
         Button(
             onClick = {
                 if (isLastPage) {
-                    AppLog.i("Onboarding completed")
-                    onFinish()
+                    onIntent(OnboardingIntent.Finish)
                 } else {
                     scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
                 }
             },
+            enabled = !state.isSaving,
             shape = CircleShape,
             modifier = Modifier.fillMaxWidth().height(52.dp)
         ) {

@@ -78,4 +78,48 @@
     <string name="light_mode_desc">Warm editorial parchment palette</string>
     <string name="sign_out">Sign Out of Wearcast</string>
     <string name="app_version">Wearcast v%1$s · Build %2$s</string>
+
+    <!-- Auth: common -->
+    <string name="auth_username_label">Username</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_confirm_password_label">Confirm password</string>
+    <string name="auth_show">Show</string>
+    <string name="auth_hide">Hide</string>
+    <string name="brand_name">Hanger</string>
+
+    <!-- Login -->
+    <string name="login_overline">WELCOME BACK</string>
+    <string name="login_greeting">Hello!</string>
+    <string name="login_greeting_sub">Welcome back to Hanger</string>
+    <string name="register_back">Back to sign in</string>
+    <string name="login_title">Sign in</string>
+    <string name="login_registered_notice">Account created. Sign in to continue.</string>
+    <string name="login_subtitle">Sign in to see outfits picked from your own closet.</string>
+    <string name="login_button">Sign in</string>
+    <string name="login_no_account">Don\'t have an account?</string>
+    <string name="login_create_account">Create one</string>
+
+    <!-- Register -->
+    <string name="register_overline">NEW ACCOUNT</string>
+    <string name="register_title">Create account</string>
+    <string name="register_subtitle">Your closet, your weather, your daily looks.</string>
+    <string name="register_button">Create account</string>
+    <string name="register_have_account">Already have an account?</string>
+    <string name="register_sign_in">Sign in</string>
+    <string name="register_username_hint">3 to 24 characters: letters, digits, dot, dash, underscore</string>
+    <string name="register_password_hint">At least 8 characters, with a letter and a digit</string>
+
+    <!-- Validation and auth errors -->
+    <string name="error_username_empty">Enter a username</string>
+    <string name="error_username_short">Username must be at least 3 characters</string>
+    <string name="error_username_long">Username must be at most 24 characters</string>
+    <string name="error_username_chars">Use only letters, digits, dot, dash and underscore</string>
+    <string name="error_password_empty">Enter a password</string>
+    <string name="error_password_short">Password must be at least 8 characters</string>
+    <string name="error_password_long">Password must be at most 64 characters</string>
+    <string name="error_password_weak">Password must contain a letter and a digit</string>
+    <string name="error_confirmation_empty">Repeat the password</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_invalid_credentials">Wrong username or password</string>
+    <string name="error_user_exists">This username is already taken</string>
 </resources>
